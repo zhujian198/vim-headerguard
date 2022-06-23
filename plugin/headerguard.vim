@@ -36,9 +36,9 @@ function! s:HeaderguardName()
     let project_prefix_name = toupper(g:header_guard_projectname)
     let projectname = toupper(expand('%:t:gs/[^0-9a-zA-Z_]/_/g'))
     if !empty(project_prefix_name)
-        let projectname = projectname.'_'
-    else
         let projectname = project_prefix_name.'_'.projectname.'_'
+    else
+        let projectname = projectname.'_'
     endif
     return projectname
 endfunction
