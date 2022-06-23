@@ -30,7 +30,17 @@ function! s:Func(funcSuffix)
 endfunction
 
 function! s:HeaderguardName()
-    return toupper(expand('%:t:gs/[^0-9a-zA-Z_]/_/g'))
+    if !exists("g:header_guard_projectname")
+        let g:header_guard_projectname = input("Enter name of the project name: ")
+    endif
+    let project_prefix_name = toupper(g:header_guard_projectname)
+    let projectname = toupper(expand('%:t:gs/[^0-9a-zA-Z_]/_/g'))
+    if !empty(project_prefix_name)
+        let projectname = projectname.'_'.
+    else
+        let projectname = project_prefix_name.'_'.projectname.'_'.
+    endif
+    return projectname
 endfunction
 
 function! s:HeaderguardLine1()
